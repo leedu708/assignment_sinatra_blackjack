@@ -1,0 +1,56 @@
+<html>
+
+  <!-- Asks the player to make a play -->
+  <% if result == "" %>
+    <h1>Computer: <%= computer[0..-2] %>  X</h1>
+    <h1>You: <%= player %></h1>
+    <h1>You bet $<%= bet_value %></h1>
+
+    <form action="/blackjack" method = "get">
+      <input type="radio" name="play" value="stand">Stand<br>
+      <input type="radio" name="play" value="hit">Hit<br><br>
+      <input type="submit" value="Make Play">
+    </form>
+
+  <!-- Losing Screen -->
+  <% elsif result == "loss" || result == "bust" %>
+    <h1>Computer: <%= computer %></h1>
+    <h1>You: <%= player %></h1>
+    <h1>You bet $<%= bet_value %></h1>
+
+    <form action="/bet" method = "get">
+      <input type="submit" value="You lost, press to bet again.">
+    </form>
+
+  <!-- Winning Screen -->
+  <% elsif result == "win" %>
+    <h1>Computer: <%= computer %> </h1>
+    <h1>You: <%= player %></h1>
+    <h1>You bet $<%= bet_value %></h1>
+    <form action="/bet" method = "get">
+
+      <input type="submit" value="You won, press to bet again.">
+    </form>
+
+  <!-- Push Screen -->
+  <% elsif result == "push" %>
+    <h1>Computer: <%= computer %>  </h1>
+    <h1>You: <%= player %></h1>
+    <h1>You bet $<%= bet_value %></h1>
+    <form action="/bet" method = "get">
+      <input type="submit" value="Push, press to bet again.">
+    </form>
+
+  <!-- End Game Screen e.g. out of money -->
+  <% elsif result == "out-of-money" %>
+    <h1>Computer: <%= computer %>  </h1>
+    <h1>You: <%= player %></h1>
+    <h1>You bet $<%= bet_value %></h1>
+
+    <form action="/" method = "get">
+      <input type="submit" value="You are out of money, restart the game.">
+    </form>
+
+  <%end%>
+
+</html>
